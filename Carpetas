@@ -1,0 +1,45 @@
+#include <stdio.h>
+#define mx 50
+
+int main(){
+
+    int carpetas, f, numero, end, suma, deleted, e, resultado;
+
+
+    char ext[mx];
+
+    printf("Obten la dimension de la carpeta: ");
+
+    fgets(ext, mx, stdin);
+
+    printf("Dame la cantidad de carpetas: ");
+
+    scanf("%d", &carpetas);
+
+    printf("\n");
+
+
+    for (f = 1; f < carpetas; f++)
+    {
+        printf("\nNombre de la %da carpeta %s. ", f, ext);
+
+        scanf("%d", &deleted);
+    }
+
+    printf("\n Nombre de la %da carpeta %s.  ", f, ext);
+
+    scanf("%d", &end);
+
+    printf("Ingresa el numero que va a sumar");
+
+    scanf("%d", &suma);
+
+    e = 0;
+
+
+    for (e = 12; e <= suma; e++)
+    {
+        printf("%s.%d \n", ext, e);
+    }
+
+}
