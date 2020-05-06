@@ -37,11 +37,11 @@ int main()
 
     printf("Introduzca la escolaridad:\n");
     fflush(stdin);
-    scanf(estructura_pers[cont].escolaridad, 99,stdin);
+    scanf(estructura_pers[cont].escolaridad, 19,stdin);
 
     printf("Introduzca la religion \n");
     fflush(stdin);
-    scanf(estructura_pers[cont].religion, 99,stdin);
+    scanf(estructura_pers[cont].religion, 49,stdin);
 
 
 
