@@ -23,7 +23,7 @@ char CD(Persona array_de_personas[3])
 		printf("Error al cargar el archivo\n");
 		printf("carga de los datos [S]\n");
 		scanf("%c",&opc);
-
+}
 
 	return 0;
 }
