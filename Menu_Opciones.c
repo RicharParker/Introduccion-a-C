@@ -127,7 +127,7 @@ int main(void)
          break;
         case 4:
 	opc=0;
-	GD(array_de_personas);//GUARDA LOSS DATOS DE LA ARRAY
+	GD(array_de_personas);//GUARDA LOS DATOS DE LA ARRAY
         break;
         case 5:
         break;
