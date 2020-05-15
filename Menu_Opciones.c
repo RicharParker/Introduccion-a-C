@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 typedef struct persona
 {
@@ -8,75 +7,101 @@ typedef struct persona
 	char sexo;
 	char direccion[100], religion[50], escolaridad[20];
 	unsigned short int edad;
+	
+} Persona;
 
-}Persona;
-Persona array_de_personas[3];
-char CD(Persona array_de_personas[3])
+Persona array_de_personas[3]; 
+
+char cargar_datos(Persona array_de_personas[3])
 {
 	int charge;
-	char opc='n';
-	FILE *archivo;
-	archivo = fopen("miarchivo.bin", "rb");
-
+	char opcion1='n';
+	FILE *aarchivo;
+	archivo = fopen("archivo.bin", "rb");
+	
 	if(archivo == NULL)
 	{
 		printf("Error al cargar el archivo\n");
-		printf("carga de los datos [S]\n");
-		scanf("%c",&opc);
-}
+		printf("Desea cargar los datos manualmente? [S/N]\n");
+		scanf("%c",&opcion1);
+		if (opcion1=='n'||opcion1=='N')
+		{
+			return 0;
+			
+		} else{
+			for (size_t i = 0; i < 3; i++)
+			{
+				printf("\n");
+				array_de_personas[i].id_persona = i+1;
+				while ((charge = getc(stdin)) != '\n' && charge != EOF);
+				printf("Introduzca el nombre completo:\n");
+				fgets(array_de_personas[i].nombre, 99,stdin);
+				printf("Introduzca el sexo [M/F]:\n");
+				array_de_personas[i].sexo = getc(stdin);
+				while ((charge = getc(stdin)) != '\n' && charge != EOF);
+				printf("Introduzca la direccion:\n");
+				fgets(array_de_personas[i].direccion, 99,stdin);
+				printf("Introduzca la religion:\n");
+				fgets(array_de_personas[i].religion, 49,stdin);
+				printf("Introduzca la escolaridad:\n");
+				fgets(array_de_personas[i].escolaridad, 19,stdin);
+				printf("Introduzca la edad:\n");
+				scanf("%hu", &array_de_personas[i].edad);
+			}
+		}
+	}
+	fclose(archivo);
 
 	return 0;
 }
-char MP(Persona array_de_personas[3])// MODIFICAR DATOS DE LA PERSONA
+
+
+char modificar_persona(Persona array_de_personas[3])
 {
 	int seleccion=0,m;
 	char resultado;
 	do
 	{
-         printf("\nSeleccione la persona a modificar [1-10]: ");
-         scanf("%d",&seleccion);
-	 printf("\nPersona #%d\n",seleccion);
-	 while ((m = getc(stdin)) != '\n' && m != EOF);
-	 printf("Introduzca el nombre completo:\n");
-	 fgets(array_de_personas[seleccion-1].nombre, 99,stdin);
-	 printf("Introduzca el sexo [M/F]:\n");
-	 array_de_personas[seleccion-1].sexo = getc(stdin);
-	 while ((m = getc(stdin)) != '\n' && m != EOF);
-	 printf("Introduzca la direccion:\n");
-	 fgets(array_de_personas[seleccion-1].direccion, 99,stdin);
-	 printf("Introduzca la religion:\n");
-	 fgets(array_de_personas[seleccion-1].religion, 49,stdin);
-	 printf("Introduzca la escolaridad:\n");
-	 fgets(array_de_personas[seleccion-1].escolaridad, 19,stdin);
-	 printf("Introduzca la edad:\n");
-	 scanf("%hu", &array_de_personas[seleccion-1].edad);
-	 while ((m = getc(stdin)) != '\n' && m != EOF);
-	 printf("La persona #%d ha sido modificada\n",seleccion);
-	 printf("Desea seguir modificando? [S/N]\n");
-	 scanf("%c",&resultado);
+		printf("\nSeleccione la persona a modificar [1-10]: ");
+		scanf("%d",&seleccion);
+		printf("\nPersona #%d\n",seleccion);
+		while ((m = getc(stdin)) != '\n' && m != EOF);
+		printf("Introduzca el nombre completo:\n");
+		fgets(array_de_personas[seleccion-1].nombre, 99,stdin);
+		printf("Introduzca el sexo [M/F]:\n");
+		array_de_personas[seleccion-1].sexo = getc(stdin);
+		while ((m = getc(stdin)) != '\n' && m != EOF);
+		printf("Introduzca la direccion:\n");
+		fgets(array_de_personas[seleccion-1].direccion, 99,stdin);
+		printf("Introduzca la religion:\n");
+		fgets(array_de_personas[seleccion-1].religion, 49,stdin);
+		printf("Introduzca la escolaridad:\n");
+		fgets(array_de_personas[seleccion-1].escolaridad, 19,stdin);
+		printf("Introduzca la edad:\n");
+		scanf("%hu", &array_de_personas[seleccion-1].edad);
+		while ((m = getc(stdin)) != '\n' && m != EOF);
+		printf("La persona #%d ha sido modificada\n",seleccion);
+		printf("Desea seguir modificando? [S/N]\n");
+		scanf("%c",&resultado);
 	}
 	while(resultado=='S'||resultado=='S');
 	return 0;
-        }
-       char SP(Persona array_de_personas[10]) //MOSTRAR DATOS DE LA PERSONA
-        {
-	for (size_t i = 0; i < 2; i++)
-	return 0;
-       }
-       char GD(Persona array_de_personas[10]) //Guardar datos
-       {
+}
+char guardar_datos(Persona array_de_personas[10]) 
+{
 	FILE *archivo;
 	printf("\nGuardando datos en archivo.bin\n");
 	archivo = fopen("archivo.bin", "wb");
 	if(archivo == NULL)
 	{
-	printf("Error al abrir \n");
-	return 1;
+		printf("Error al abrir \n");
+		return 1;
 	}
 	fwrite(array_de_personas, sizeof(Persona), 3, archivo);
 	printf("Guardado en file: archivo.bin\n");
 	return 0;
 }
+
 
 
 int main(void)
